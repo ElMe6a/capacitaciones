@@ -1,0 +1,43 @@
+<odoo>
+    <data>
+        
+        <!-- VISTA FORM -->
+        <record model="ir.ui.view" id="l10n_mx_cfdi_fiel_form">
+            <field name="name">cfdi fiel form</field>
+            <field name="model">l10n_mx.cfdi_fiel</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <field name="fiel_name" invisible="1"/>
+                            <field name="fiel" string="FIEL" filename="fiel_name" widget="binary"/>
+                            <field name="clave_name" invisible="1"/>
+                            <field name="clave" string="Clave" filename="clave_name" widget="binary"/>
+                            <field name="company_id" readonly="1" save_force="1"/>
+                            <field name="serial_number" string="Contraseña" password="True"/>
+                            <label for="emition_date" string="Fechas"/>
+                        </group>
+                        <group>
+                            <group>
+                                <field name="emition_date"/>
+                            </group>
+                            <group>
+                                <field name="expiration_date"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+                <!-- VISTA FORM -->
+        <record model="ir.ui.view" id="l10n_mx_cfdi_fiel_tree">
+            <field name="name">cfdi fiel tree</field>
+            <field name="model">l10n_mx.cfdi_fiel</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="company_id"/>
+                </tree>
+            </field>
+        </record>
+    </data>
+</odoo>

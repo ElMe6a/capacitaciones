@@ -1,0 +1,79 @@
+<odoo>
+    <data>
+<!--
+       Ingresar la estructura del menú
+-->
+        <record id="act_l10n_mx_cfdi_document" model="ir.actions.act_window">
+            <field name="name">Documentos</field>
+            <field name="res_model">l10n_mx.cfdi_document</field>
+            <field name="view_mode">tree,form</field>
+            <field name="context">{'search_default_group_by_state': 1}</field>
+            <field name="search_view_id" ref="view_l10n_mx_cfdi_document_filter"/>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    No hay documentos aún...
+                </p>
+            </field>
+        </record>
+        <record id="act_l10n_mx_cfdi_request" model="ir.actions.act_window">
+            <field name="name">Solicitudes</field>
+            <field name="res_model">l10n_mx.cfdi_request</field>
+            <field name="view_mode">tree,form</field>
+            <field name="context">{}</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    No hay solicitudes aún...
+                </p>
+            </field>
+        </record>
+<!--         <record id="act_l10n_mx_cfdi_session" model="ir.actions.act_window">
+            <field name="name">Sesiones</field>
+            <field name="res_model">l10n_mx.cfdi_session</field>
+            <field name="view_mode">tree,form</field>
+            <field name="context">{}</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    No hay sesiones aún...
+                </p>
+            </field>
+        </record> -->
+        <record id="act_l10n_mx_cfdi_adjust" model="ir.actions.act_window">
+            <field name="name">Ajustes</field>
+            <field name="view_mode">form</field>
+            <field name="res_model">res.config.settings</field>
+            <field name="target">inline</field>
+            <field name="context">{'module':'l10n_mx_cfdi_manager'}</field>
+            <field name="view_id" ref="base_setup.res_config_settings_view_form"/>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    No hay configuraciones aún...
+                </p>
+            </field>
+        </record>
+        
+<!--         <record id="act_l10n_mx_cfdi_efos" model="ir.actions.act_window">
+            <field name="name">EFOS</field>
+            <field name="view_mode">form</field>
+            <field name="res_model">l10n_mx.cfdi_efos</field>
+        </record> -->
+        
+        
+        <menuitem name="l10n_mx_cfdi_manager" id="l10n_mx_cfdi_manager.menu_root" web_icon="l10n_mx_cfdi_manager,static/description/icon.png"/>
+        
+            <menuitem name="Documentos" id="l10n_mx_cfdi_manager.cfdi_document" parent="l10n_mx_cfdi_manager.menu_root" sequence="1"
+                      action="l10n_mx_cfdi_manager.act_l10n_mx_cfdi_document"/>
+        
+             <menuitem name="solicitudes" id="l10n_mx_cfdi_manager.cfdi_request" parent="l10n_mx_cfdi_manager.menu_root" sequence="2"
+                      action="l10n_mx_cfdi_manager.act_l10n_mx_cfdi_request"/>
+            
+<!--             <menuitem name="EFOS" id="l10n_mx_cfdi_manager.cfdi_efos" parent="l10n_mx_cfdi_manager.menu_root" sequence="3"
+                      action="l10n_mx_cfdi_manager.act_l10n_mx_cfdi_efos"/> -->
+        
+<!--             <menuitem name="sesiones" id="l10n_mx_cfdi_manager.cfdi_session" parent="l10n_mx_cfdi_manager.menu_root" sequence="3"
+                      action="l10n_mx_cfdi_manager.act_l10n_mx_cfdi_session"/> -->
+        
+            <menuitem name="Configuración" id="l10n_mx_cfdi_manager_config" parent="l10n_mx_cfdi_manager.menu_root" sequence="3"/>
+                <menuitem name="Ajustes" id="l10n_mx_cfdi_manager_adjust" parent="l10n_mx_cfdi_manager_config" sequence="1"
+                          action="l10n_mx_cfdi_manager.act_l10n_mx_cfdi_adjust"/>
+    </data>
+</odoo>

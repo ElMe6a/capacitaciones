@@ -1,0 +1,18 @@
+<odoo>
+  <data>
+        <record id="account_move_documentos_relacionados" model="ir.ui.view">
+            <field name="name">Documents</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_move_form"/>
+            <field name="arch" type="xml">    
+                <xpath expr="//group[@class='oe_subtotal_footer oe_right']" position="inside">
+                    <field name="cfdi_document" options="{'no_create': True}" readonly="1" save_force="1"/>
+                </xpath>
+                <xpath expr="//header" position="inside">
+                    <button name="asignar_cfdi" string="VINCULAR CFDI" class="oe_highlight" type="object" attrs="{'invisible':['|',('cfdi_document','!=',False),('move_type','not in',('in_invoice','in_refund','in_receipt'))]}"/>
+                    <button name="unlink_cfdi" string="DESVINCULAR CFDI" class="oe_highlight" type="object" attrs="{'invisible':['|',('cfdi_document','=',False),('move_type','not in',('in_invoice','in_refund','in_receipt'))]}"/>
+                </xpath>
+            </field>
+        </record>
+  </data>
+</odoo>

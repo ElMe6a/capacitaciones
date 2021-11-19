@@ -1,0 +1,27 @@
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="l10n_mx_cfdi_efos_form">
+            <field name="name">EFOS</field>
+            <field name="model">l10n_mx.cfdi_efos</field>
+            <field name="arch" type="xml">
+                <form>
+<!--                     <head> -->
+                        <button name="download_efos_list_sat" string="Download efos" class="oe_highlight" type="object"/>
+<!--                     </head> -->
+                    <sheet>
+                        <field name="status"/>
+                        <field name="partner_id"/>
+                    </sheet>
+                    <foot></foot>
+                </form>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="l10n_mx_cfdi_efos_tree">
+            <field name="name">EFOS</field>
+            <field name="model">l10n_mx.cfdi_efos</field>
+            <field name="arch" type="xml">
+                <tree></tree>
+            </field>
+        </record>
+    </data>
+</odoo>

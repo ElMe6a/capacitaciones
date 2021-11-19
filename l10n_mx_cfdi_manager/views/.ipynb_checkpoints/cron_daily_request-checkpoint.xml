@@ -1,0 +1,15 @@
+<odoo>
+    <data>
+        <record id="ir_cron_daily_request" model="ir.cron">
+            <field name="name">Solicitudes: Petición diaria</field>
+            <field name="model_id" ref="model_l10n_mx_cfdi_request"/>
+            <field name="state">code</field>
+            <field name="code">model.automated_request()</field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+            <field name="numbercall">-1</field>
+            <field name="active" eval="True"/>
+            <field name="doall" eval="False"/>
+        </record>
+    </data>
+</odoo>

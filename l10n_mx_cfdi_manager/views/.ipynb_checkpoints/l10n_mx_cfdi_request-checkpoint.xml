@@ -1,0 +1,50 @@
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="l10n_mx_cfdi_request_tree">
+            <field name="name">Solicitudes</field>
+            <field name="model">l10n_mx.cfdi_request</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="id_solicitud" string="Nombre"/>
+                    <field name="start_date" string="Fecha inicial"/>
+                    <field name="end_date" string="Fecha final"/>
+                    <field name="state" string="Estado de la solicitud"/>
+                    <field name="done" string="Descargado" optional="hide"/>
+                    <field name="total_documents"/>
+                </tree>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="l10n_mx_cfdi_request_form">
+            <field name="name">Solicitud</field>
+            <field name="model">l10n_mx.cfdi_request</field>
+            <field name="arch" type="xml">
+                <form edit="false">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="company_id" string="Compañia" domain="[('fiel_ids','!=',False)]" options="{'no_create': True}"/>
+                            </group>
+                        </group>
+                        <group>
+                            <field name="rfc_consultant" invisible="1" force_save="1"/>
+                            <field name="rfc_receptor" invisible="1" force_save="1"/>
+                            <group>
+                                <field name="start_date" string="Fecha inicial"/>
+                                <field name="end_date" string="Fecha final"/>
+                            </group>
+                            <group>
+                                <field name="state" string="Estado de la solicitud" readonly="1" force_save="1"/>
+                                <field name="done" string="Descargado" readonly="1" force_save="1"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Documentos" attrs="{'invisible':[('done','=',False)]}">
+                                <field name="cfdi_documents"/>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>
