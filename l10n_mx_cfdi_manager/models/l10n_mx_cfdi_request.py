@@ -143,6 +143,8 @@ class l10n_mx_cfdi_request(models.Model):
             DATE = xml.getElementsByTagName('cfdi:Comprobante')[0].getAttribute('Fecha').split('T')
             METODO_PAGO = xml.getElementsByTagName('cfdi:Comprobante')[0].getAttribute('CondicionesDePago')
             CONCEPTOS = xml.getElementsByTagName('cfdi:Concepto')
+            FOLIO = xml.getElementsByTagName('cfdi:Comprobante')[0].getAttribute('Folio')
+            TYPE_C = xml.getElementsByTagName('cfdi:Comprobante')[0].getAttribute('TipoDeComprobante')
             
             validacion = Validacion()
             estado = validacion.obtener_estado(RFC_EMISOR, RFC_RECEPTOR, TOTAL, UUID)
@@ -156,7 +158,9 @@ class l10n_mx_cfdi_request(models.Model):
                 'total': float(TOTAL),
                 'date': DATE,
                 'metodo_pago': METODO_PAGO,
-                'conceptos':CONCEPTOS
+                'conceptos': CONCEPTOS,
+                'folio': FOLIO,
+                'type': TYPE_C
             }
     
     def verificar_solicitud(self):
@@ -219,7 +223,9 @@ class l10n_mx_cfdi_request(models.Model):
                 'emisor': file_data['emisor'],
                 'rfc_receptor': file_data['rfc_receptor'],
                 'total': file_data['total'],
-                'date': datetime.datetime.strptime(file_data['date'][0],'%Y-%m-%d')
+                'date': datetime.datetime.strptime(file_data['date'][0],'%Y-%m-%d'),
+                'folio': file_data['folio'],
+                'type_comprobante': file_data['type'],
             })
             try:                
                 document._extract_metada()

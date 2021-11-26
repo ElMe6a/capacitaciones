@@ -34,4 +34,7 @@ class l10n_mx_cfdi_manager(models.Model):
     
     def unlink_cfdi(self):
         for rec in self:
+            rec.cfdi_document.write({
+                'link_state':'unlink'
+            })
             rec.cfdi_document = False

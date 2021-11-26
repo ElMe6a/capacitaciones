@@ -11,6 +11,7 @@
                                 <field name="emisor" readonly="1"/>
                                 <field name="rfc_emisor" readonly="1"/>
                                 <field name="total" readonly="1"/>
+                                <field name="link_state" readonly="1" string="¿Esta vinculado?"/>
                             </group>
                             <group>
                                 <field name="uuid" readonly="1"/>
@@ -24,7 +25,7 @@
                                 <field name="metadata_pretty"/>
                             </page>
                             <page string="Facturas">
-                                <field name="moves_ids" options="{'no_create': True}" domain="[('move_type','in',['in_invoice','in_refund','in_receipt'])]"/>
+                                <field name="moves_ids" options="{'create': False}" domain="[('move_type','in',['in_invoice','in_refund','in_receipt'])]"/>
                             </page>
                         </notebook>
                     </sheet>
@@ -39,6 +40,7 @@
                 <search string="Search Journal Items">
                     <group expand="1" string="Group By">
                         <filter string="Estado SAT" name="group_by_state" domain="[]" context="{'group_by': 'cfdi_state'}"/>
+                        <filter string="Vinculacion" name="group_by_link" domain="[]" context="{'group_by': 'link_state'}"/>
                     </group>
                 </search>
             </field>
@@ -50,6 +52,7 @@
             <field name="arch" type="xml">
                 <tree create="false" edit="false">
                     <field name="uuid" string="UUID"/>
+                    <field name="folio" string="Folio"/>
                     <field name="date" string="Fecha"/>
                     <field name="rfc_emisor" string="RFC Emisor"/>
                     <field name="emisor" string="Emisor" optional="hide"/>

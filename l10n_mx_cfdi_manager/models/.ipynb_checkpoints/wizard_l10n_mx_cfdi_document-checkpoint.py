@@ -34,5 +34,9 @@ class WizardMoveDocument(models.TransientModel):
             move.write({
                 'cfdi_document':self.cfdi_document.id
             })
+            
+            self.cfdi_document.write({
+                'link_state':'link'
+            })
         else:
             raise UserError("Seleccione un documento")

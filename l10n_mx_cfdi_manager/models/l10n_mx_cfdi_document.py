@@ -72,6 +72,35 @@ class l10n_mx_cfdi_document(models.Model):
         compute='_pretty_xml_data'
     )
     
+    folio = fields.Char(
+        string="Folio"
+    )
+    
+    link_state = fields.Selection([
+        ('link', 'Vinculado'),
+        ('unlink', 'No vinculado')],
+        default='unlink'
+#         compute = "_is_doc_linked",
+#         store=True
+    )
+    
+    type_comprobante = fields.Selection([
+        ('I', 'Ingreso'),
+        ('E', 'Egreso'),
+        ('T', 'Traslado'),
+        ('p', 'Pago'),
+        ('N', 'Nomina')],
+        string="Tipo de documento",
+        default="I"
+    )
+    
+    def _is_doc_linked(self):
+        for rec in self:
+            if rec.moves_ids:
+                rec.link_state = 'link'
+            else:
+                rec.link_state = 'unlink'
+    
     def _pretty_xml_data(self):
         for rec in self:
             xml_data = minidom.parseString(rec.metadata)
