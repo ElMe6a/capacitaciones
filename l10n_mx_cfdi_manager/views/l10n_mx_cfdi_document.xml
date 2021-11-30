@@ -41,6 +41,7 @@
                     <group expand="1" string="Group By">
                         <filter string="Estado SAT" name="group_by_state" domain="[]" context="{'group_by': 'cfdi_state'}"/>
                         <filter string="Vinculacion" name="group_by_link" domain="[]" context="{'group_by': 'link_state'}"/>
+                        <filter string="Tipo" name="group_by_type" domain="[]" context="{'group_by': 'type_comprobante'}"/>
                     </group>
                 </search>
             </field>

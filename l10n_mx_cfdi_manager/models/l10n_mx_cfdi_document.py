@@ -88,7 +88,7 @@ class l10n_mx_cfdi_document(models.Model):
         ('I', 'Ingreso'),
         ('E', 'Egreso'),
         ('T', 'Traslado'),
-        ('p', 'Pago'),
+        ('P', 'Pago'),
         ('N', 'Nomina')],
         string="Tipo de documento",
         default="I"
