@@ -18,6 +18,10 @@ class l10n_mx_cfdi_document(models.Model):
     _description = 'Modelo de documentos'
     _order = 'id desc'
     
+    name = fields.Char(
+        related="uuid"
+    )
+    
     cfdi_request=fields.Many2one(
         'l10n_mx.cfdi_request',
         string="Solicitud CFDI"
@@ -163,8 +167,9 @@ class l10n_mx_cfdi_document(models.Model):
     def create_bill(self):
         data = self._read_cfdi(self.attatch)
         if data['rfc_receptor'] == self.env.company.vat:
-            partner = self.env['res.partner'].search([('vat','=',data['rfc_emisor']),('is_company','=',True)])
-            if not partner:
+            partner = self.env['res.partner'].search([('vat','=',data['rfc_emisor'])])
+#             partner = self.env['res.partner'].search([('vat','=',data['rfc_emisor']),('is_company','=',True)])
+            if len(partner) < 1:
                 try:
                     partner = self.env['res.partner'].create({
                         'name': data['emisor'],
@@ -174,6 +179,7 @@ class l10n_mx_cfdi_document(models.Model):
                     pass
             payment_term = self.env['account.payment.term'].with_context(lang='es_MX').search([('name', '=', data['metodo_pago'])])
             account_move = self.env['account.move'].create({
+                'partner_id': partner.id,
                 'invoice_date': datetime.datetime.strptime(data['date'][0],'%Y-%m-%d'),
                 'date': datetime.datetime.strptime(data['date'][0],'%Y-%m-%d'),
                 'state': 'draft',
@@ -289,3 +295,7 @@ class l10n_mx_cfdi_document(models.Model):
                         '{:20,.2f}'.format(abs(diferencia))
                     )
                 )
+
+            self.write({
+                'link_state':'link',
+            })

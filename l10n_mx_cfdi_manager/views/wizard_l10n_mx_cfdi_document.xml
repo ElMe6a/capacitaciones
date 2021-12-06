@@ -18,7 +18,7 @@
                     <notebook>
                         <page string="Documento">
                             <label for="cfdi_document" string="Documento CFDI"/>
-                            <field name="cfdi_document" domain="[('date','=',date),('date','!=',False),('moves_ids','=',False)]" options="{'no_create': True}"/>
+                            <field name="cfdi_document" domain="[('date','=',date),('date','!=',False),('link_state','=','unlink')]" options="{'no_create': True}"/>
                             <field name="metadata"/>
                         </page>
                     </notebook>

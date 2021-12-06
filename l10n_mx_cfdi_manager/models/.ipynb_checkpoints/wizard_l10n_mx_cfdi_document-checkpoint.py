@@ -29,8 +29,16 @@ class WizardMoveDocument(models.TransientModel):
     )
     
     def event_wizard(self):
-        if self.cfdi_document != False:
+        if self.cfdi_document:
             move = self.env['account.move'].search([('id','=',self.move_id)])
+            if self.cfdi_document.rfc_emisor != move.partner_id.vat:
+                raise UserError("RFC de documento CFDI no corresponde al del proveedor")
+                
+            if self.cfdi_document.total != move.amount_total:
+                _logger.warning(abs(self.cfdi_document.total - move.amount_total))
+                if round(abs(self.cfdi_document.total - move.amount_total),2) > 0.05:
+                    raise UserError("Difeerencia es mayor a 0.05 centavos")
+            
             move.write({
                 'cfdi_document':self.cfdi_document.id
             })
